@@ -1,0 +1,18 @@
+# Use the official Python image as a base
+FROM python:3.11-slim
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the application code and requirements file into the container
+COPY requirements.txt .
+COPY . .
+
+# Install Python dependencies
+RUN pip install -r requirements.txt
+
+# Expose the port the app runs on (if it's a web app)
+EXPOSE 80
+
+# Command to run the application
+CMD ["python", "web.py"]
