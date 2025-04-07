@@ -68,8 +68,15 @@ jobs:
                 echo "Cleaning up unused Docker resources"
                 docker system prune -a --force
                 echo "CLEEEEEEEEEEEEENNNNN"
-                aws ecr batch-delete-image \
-                    --repository-name golu \
-                    --image-ids $(aws ecr list-images --repository-name golu --region us-east-2 --query 'imageIds[*]' --output json | jq -r '.[] | @csv') \
-                    --region us-east-2
+                image_ids=$(aws ecr list-images --repository-name golu --region us-east-2 --query 'imageIds[*]' --output json)
+
+                if [ -n "$image_ids" ]; then
+                    aws ecr batch-delete-image \
+                         --repository-name golu \
+                         --image-ids "$image_ids" \
+                         --region us-east-2
+                else
+                    echo "No images found for deletion."
+                fi
+
             EOF
