@@ -62,6 +62,7 @@ jobs:
                 echo "Pulling the latest Docker image"
                 docker pull 423755636060.dkr.ecr.us-east-2.amazonaws.com/golu:latest
                 echo "run container"
+                docker stop lala
                 docker rm lala
                 docker run -d --name lala -p 8081:80 423755636060.dkr.ecr.us-east-2.amazonaws.com/golu:latest
                 echo "Cleaning up unused Docker resources"
