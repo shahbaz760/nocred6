@@ -3,7 +3,7 @@ name: vegeta
 on:
   push:
      branches:
-          - main    GDDF
+          - main   
 jobs:
   build:
     runs-on: ubuntu-latest
